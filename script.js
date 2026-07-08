@@ -14,16 +14,45 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
 
-// कार्ड दिखाने और डेटा भरने का मुख्य फंक्शन
+// 1. शपथ पत्र का टेक्स्ट अपडेट करने का फंक्शन
+window.updateOath = () => {
+    const gender = document.getElementById("gender-select").value;
+    const oathText = document.getElementById("oath-text");
+    if (gender === "male") {
+        oathText.innerHTML = "मैं, शपथ लेता हूँ कि मैं संगठन का एक निष्ठावान <b>कार्यकर्ता</b> रहूँगा। मैं सच बोलूँगा और कभी झूठ का साथ नहीं दूँगा। मैं हमेशा सच्चाई के साथ खड़ा रहूँगा।";
+    } else {
+        oathText.innerHTML = "मैं, शपथ लेती हूँ कि मैं संगठन की एक निष्ठावान <b>कार्यकर्ता</b> रहूँगी। मैं सच बोलूँगी और कभी झूठ का साथ नहीं दूँगी। मैं हमेशा सच्चाई के साथ खड़ी रहूँगी।";
+    }
+};
+
+// 2. शपथ स्वीकार करने पर बटन इनेबल करने का फंक्शन
+window.toggleSignInButton = () => {
+    const btn = document.getElementById("google-btn");
+    if (document.getElementById("oath-check").checked) {
+        btn.disabled = false;
+        btn.style.background = "#013220";
+        btn.style.color = "#d4af37";
+        btn.style.cursor = "pointer";
+        btn.innerText = "Google से जुड़ें";
+    } else {
+        btn.disabled = true;
+        btn.style.background = "#cccccc";
+        btn.style.color = "#666";
+        btn.style.cursor = "not-allowed";
+        btn.innerText = "शपथ लेने के बाद लॉग-इन करें";
+    }
+};
+
+// 3. कार्ड दिखाने का मुख्य फंक्शन
 const showCard = (user) => {
-    const card = document.getElementById('id-card');
+    document.getElementById('oath-section').style.display = 'none';
     document.getElementById('auth-section').style.display = 'none';
+    const card = document.getElementById('id-card');
     card.style.display = 'block';
     
     document.getElementById('user-name').innerText = user.displayName;
-    document.getElementById('user-designation').innerText = "राष्ट्रीय डिजिटल संयोजक";
     
-    // फोटो जोड़ना (अगर पहले से मौजूद नहीं है)
+    // फोटो जोड़ना
     if (!card.querySelector('img')) {
         const img = document.createElement('img');
         img.src = user.photoURL;
@@ -35,16 +64,19 @@ const showCard = (user) => {
     }
 };
 
-// 1. गूगल साइन-इन हैंडलर
+// 4. गूगल साइन-इन
 window.signInWithGoogle = () => {
-  signInWithPopup(auth, provider).then((result) => {
-    showCard(result.user);
-  });
+    signInWithPopup(auth, provider).then((result) => {
+        showCard(result.user);
+    });
 };
 
-// 2. पेज रिफ्रेश होने पर लॉगिन बरकरार रखने के लिए
+// 5. पेज रिफ्रेश पर लॉगिन बनाए रखना
 onAuthStateChanged(auth, (user) => {
-  if (user) {
-    showCard(user);
-  }
+    if (user) {
+        showCard(user);
+    }
 });
+
+// पेज लोड होते ही शपथ लोड करें
+window.updateOath();
