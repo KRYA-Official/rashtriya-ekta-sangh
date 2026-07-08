@@ -11,20 +11,17 @@
     <div class="header">
         <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjR3YCKqAKMCuJLJ19a9t3rloo263IZh5tpom-LXDBT-m9GtM-3r3IWpRg2WqpzHaczrZlpBx2myQtzOqX_p8PhyxbjNVbLKF6I9TdDXw28-cxb0vFXGf80cm8hQGZJP8-4AbITHP3fc8UE3uR0BkzMJIFcqo8AHrmu7EOcf7fJF90YcgvQy76aoOOn1Ro/s756/1000340891.jpg" alt="राष्ट्रीय एकता संघ लोगो" class="logo">
         <h1>राष्ट्रीय एकता अखिल भारतीय मजदूर कल्याण सेवा संघ</h1>
-        <p class="motto">"मजदूरों की सेवा - राष्ट्र की एकता"</p>
     </div>
 
     <div class="team-container">
         <div class="team-section">
             <h2 class="team-title">संगठन नेतृत्व</h2>
             
-            <!-- राष्ट्रीय सचिव (हाइलाइटेड) -->
-            <div class="highlighted-name" style="background: linear-gradient(135deg, #d4af37, #b8860b); color: #013220; padding: 15px 10px; border-radius: 12px; margin-bottom: 20px; border: 2px solid #013220; font-weight: 800; font-size: 18px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+            <div class="highlighted-name" style="background: linear-gradient(135deg, #d4af37, #b8860b); color: #013220; padding: 15px 10px; border-radius: 12px; margin-bottom: 20px; border: 2px solid #013220; font-weight: 800; font-size: 18px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                 ★ राष्ट्रीय सचिव: श्री एम.डी. सिराज अंसारी ★
             </div>
 
-            <!-- डिजिटल संयोजक -->
-            <div class="my-name" style="background: linear-gradient(135deg, #013220, #035a39); color: #fff; padding: 15px 10px; border-radius: 12px; margin-bottom: 20px; border: 2px solid #d4af37; font-weight: 800; font-size: 18px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+            <div class="my-name" style="background: linear-gradient(135deg, #013220, #035a39); color: #fff; padding: 15px 10px; border-radius: 12px; margin-bottom: 20px; border: 2px solid #d4af37; font-weight: 800; font-size: 18px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                 राष्ट्रीय डिजिटल संयोजक: मुकेश राय
             </div>
 
@@ -35,16 +32,34 @@
         </div>
     </div>
 
+    <!-- शपथ पत्र सेक्शन -->
+    <div id="oath-section" style="margin: 20px auto; max-width: 500px; background: #fff; padding: 20px; border-radius: 15px; border: 2px solid #013220; text-align: center;">
+        <h3 style="color: #013220;">सदस्यता शपथ पत्र</h3>
+        <p style="font-size: 14px; text-align: left;">अपना जेंडर चुनें:</p>
+        <select id="gender-select" onchange="updateOath()" style="padding: 10px; width: 100%; margin-bottom: 15px; border-radius: 5px;">
+            <option value="male">मैं पुरुष हूँ</option>
+            <option value="female">मैं महिला हूँ</option>
+        </select>
+        <div id="oath-text" style="font-size: 14px; text-align: justify; background: #f4f4f4; padding: 10px; border-radius: 5px; color: #333;">
+            <!-- यहाँ शपथ लोड होगी -->
+        </div>
+        <br>
+        <input type="checkbox" id="oath-check" onclick="toggleSignInButton()"> 
+        <label for="oath-check" style="font-weight: bold; cursor: pointer;"> मैं शपथ स्वीकार करता/करती हूँ</label>
+    </div>
+
     <!-- साइन-इन बटन -->
-    <div id="auth-section" style="margin: 30px;">
-        <button onclick="signInWithGoogle()" style="padding: 15px 25px; background: #013220; color: #d4af37; border: 2px solid #d4af37; border-radius: 10px; cursor: pointer; font-weight: bold;">Google से जुड़ें और कार्ड पाएं</button>
+    <div id="auth-section" style="margin: 20px; text-align: center;">
+        <button id="google-btn" onclick="signInWithGoogle()" disabled style="padding: 15px 25px; background: #cccccc; color: #666; border: none; border-radius: 10px; cursor: not-allowed; font-weight: bold;">
+            शपथ लेने के बाद लॉग-इन करें
+        </button>
     </div>
     
     <!-- डिजिटल आईडी कार्ड -->
-    <div id="id-card" style="display:none; border: 3px solid #d4af37; padding: 25px; width: 300px; margin: 20px auto; background: #fff; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.3);">
+    <div id="id-card" style="display:none; border: 3px solid #d4af37; padding: 25px; width: 300px; margin: 20px auto; background: #fff; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.3); text-align: center;">
         <h2 style="color: #013220;">डिजिटल आईडी कार्ड</h2>
         <p id="user-name" style="font-size: 20px; font-weight: bold; margin: 10px 0;"></p>
-        <p id="user-designation" style="color: #013220; font-weight: bold;"></p>
+        <p style="color: #013220; font-weight: bold;">पद: कार्यकर्ता</p>
     </div>
 
     <footer>
