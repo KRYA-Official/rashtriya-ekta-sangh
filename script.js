@@ -45,8 +45,12 @@ window.toggleSignInButton = () => {
 
 // 3. कार्ड दिखाने का मुख्य फंक्शन
 const showCard = (user) => {
-    document.getElementById('oath-section').style.display = 'none';
-    document.getElementById('auth-section').style.display = 'none';
+    // शपथ और बटन वाले सेक्शन को छिपाना
+    const oathSection = document.getElementById('oath-section');
+    const authSection = document.getElementById('auth-section');
+    if (oathSection) oathSection.style.display = 'none';
+    if (authSection) authSection.style.display = 'none';
+    
     const card = document.getElementById('id-card');
     card.style.display = 'block';
     
