@@ -4,33 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>राष्ट्रीय एकता संघ | आधिकारिक मंच</title>
-    <style>
-        body { font-family: 'Poppins', sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; text-align: center; }
-        
-        /* हेडर और लोगो */
-        .header { background-color: #013220; color: #d4af37; padding: 30px 20px; border-bottom: 5px solid #d4af37; }
-        .logo { width: 130px; height: auto; border-radius: 15px; margin-bottom: 15px; border: 3px solid #d4af37; box-shadow: 0 0 15px rgba(212, 175, 55, 0.5); }
-        h1 { margin: 0; font-size: 24px; color: #d4af37; }
-        .motto { font-size: 16px; color: #fff; margin-top: 10px; font-style: italic; }
-
-        /* टीम सेक्शन */
-        .team-container { padding: 20px; max-width: 600px; margin: 20px auto; }
-        .team-section { background: #fff; padding: 25px; border-radius: 20px; border: 1px solid #ddd; box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
-        .team-title { color: #013220; border-bottom: 2px solid #d4af37; padding-bottom: 10px; margin-bottom: 20px; font-size: 22px; }
-        
-        /* आपका नाम - सबसे ऊपर और प्लस (Plus) लुक */
-        .my-name { font-size: 20px; font-weight: 800; color: #fff; background: linear-gradient(135deg, #013220, #035a39); padding: 15px; border-radius: 12px; margin-bottom: 20px; border: 2px solid #d4af37; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-        
-        .member { margin-bottom: 15px; font-size: 16px; text-align: left; padding-left: 20px; color: #333; }
-        .member b { color: #013220; }
-        
-        footer { margin-top: 30px; padding: 20px; font-size: 12px; color: #666; }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="header">
-        <!-- आपका लोगो सबसे ऊपर -->
         <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjR3YCKqAKMCuJLJ19a9t3rloo263IZh5tpom-LXDBT-m9GtM-3r3IWpRg2WqpzHaczrZlpBx2myQtzOqX_p8PhyxbjNVbLKF6I9TdDXw28-cxb0vFXGf80cm8hQGZJP8-4AbITHP3fc8UE3uR0BkzMJIFcqo8AHrmu7EOcf7fJF90YcgvQy76aoOOn1Ro/s756/1000340891.jpg" alt="राष्ट्रीय एकता संघ लोगो" class="logo">
         <h1>राष्ट्रीय एकता अखिल भारतीय मजदूर कल्याण सेवा संघ</h1>
         <p class="motto">"मजदूरों की सेवा - राष्ट्र की एकता"</p>
@@ -39,23 +17,27 @@
     <div class="team-container">
         <div class="team-section">
             <h2 class="team-title">संगठन नेतृत्व</h2>
-            
-            <!-- आपका नाम सबसे ऊपर और चमकता हुआ -->
-            <div class="my-name">
-                ★ राष्ट्रीय डिजिटल संयोजक: मुकेश राय ★
-            </div>
-
+            <div class="my-name">★ राष्ट्रीय डिजिटल संयोजक: मुकेश राय ★</div>
             <hr style="border: 0; border-top: 2px solid #013220; margin: 20px 0;">
-
             <div class="member"><b>सचिव:</b> श्री एम.डी. सिराज अंसारी</div>
             <div class="member"><b>ज़िला अध्यक्ष (बांका):</b> श्री उमर अंसारी</div>
             <div class="member"><b>ज़िला सचिव (बांका):</b> श्री टाइगर अंसारी</div>
         </div>
     </div>
 
+    <div id="auth-section" style="margin: 30px;">
+        <button onclick="signInWithGoogle()" style="padding: 15px 25px; background: #013220; color: #d4af37; border: 2px solid #d4af37; border-radius: 10px; cursor: pointer; font-weight: bold;">Google से जुड़ें और कार्ड पाएं</button>
+    </div>
+    <div id="id-card" style="display:none; border: 3px solid #d4af37; padding: 25px; width: 300px; margin: 20px auto; background: #fff; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.3);">
+        <h2 style="color: #013220;">डिजिटल आईडी कार्ड</h2>
+        <p id="user-name" style="font-size: 20px; font-weight: bold;"></p>
+        <p style="color: #013220;"><b>पद:</b> राष्ट्रीय डिजिटल संयोजक</p>
+    </div>
+
     <footer>
         <p>&copy; 2026 राष्ट्रीय एकता संघ | सर्वाधिकार सुरक्षित</p>
     </footer>
 
+    <script type="module" src="script.js"></script>
 </body>
 </html>
