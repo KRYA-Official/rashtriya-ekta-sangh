@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBzqLMQFgA7EBDM5XvgdXtJCKSKyWXgWlI",
@@ -14,31 +14,37 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
 
-window.signInWithGoogle = () => {
-  signInWithPopup(auth, provider).then((result) => {
-    const user = result.user;
+// कार्ड दिखाने और डेटा भरने का मुख्य फंक्शन
+const showCard = (user) => {
     const card = document.getElementById('id-card');
-    
     document.getElementById('auth-section').style.display = 'none';
     card.style.display = 'block';
     
-    // नाम सेट करना
     document.getElementById('user-name').innerText = user.displayName;
+    document.getElementById('user-designation').innerText = "राष्ट्रीय डिजिटल संयोजक";
     
-    // फोटो सेट करना
-    const img = document.createElement('img');
-    img.src = user.photoURL;
-    img.style.width = "100px";
-    img.style.borderRadius = "50%";
-    img.style.marginBottom = "10px";
-    img.style.border = "3px solid #013220";
-    card.insertBefore(img, card.firstChild);
+    // फोटो जोड़ना (अगर पहले से मौजूद नहीं है)
+    if (!card.querySelector('img')) {
+        const img = document.createElement('img');
+        img.src = user.photoURL;
+        img.style.width = "100px";
+        img.style.borderRadius = "50%";
+        img.style.marginBottom = "10px";
+        img.style.border = "3px solid #013220";
+        card.insertBefore(img, card.firstChild);
+    }
+};
 
-    // यूनिक आईडी सेट करना
-    const uniqueId = "ID-" + Math.floor(10000 + Math.random() * 90000);
-    const idElement = document.createElement('p');
-    idElement.innerHTML = "<b>यूनिक आईडी:</b> " + uniqueId;
-    idElement.style.color = "#013220";
-    card.appendChild(idElement);
+// 1. गूगल साइन-इन हैंडलर
+window.signInWithGoogle = () => {
+  signInWithPopup(auth, provider).then((result) => {
+    showCard(result.user);
   });
 };
+
+// 2. पेज रिफ्रेश होने पर लॉगिन बरकरार रखने के लिए
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    showCard(user);
+  }
+});
